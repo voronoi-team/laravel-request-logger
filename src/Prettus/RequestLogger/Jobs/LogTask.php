@@ -4,15 +4,12 @@ namespace Prettus\RequestLogger\Jobs;
 
 use App\Jobs\Job;
 use Illuminate\Contracts\Mail\Mailer;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Bus\Queueable;
 
-class LogTask implements SelfHandling, ShouldQueue
+class LogTask implements ShouldQueue
 {
-    use Queueable, InteractsWithQueue, SerializesModels;
+    use Queueable;
 
     protected $request;
     protected $response;
