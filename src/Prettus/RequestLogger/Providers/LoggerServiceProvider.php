@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Prettus\RequestLogger\Providers;
 
@@ -9,7 +9,7 @@ use Prettus\RequestLogger\Helpers\Benchmarking;
  * Class LoggerServiceProvider
  * @package Prettus\RequestLogger\Providers
  */
-class LoggerServiceProvider extends ServiceProvider 
+class LoggerServiceProvider extends ServiceProvider
 {
 
     /**
@@ -34,15 +34,7 @@ class LoggerServiceProvider extends ServiceProvider
      * @return void
      */
     public function register()
-    {        
-        app('router')->before(function(){
-            Benchmarking::start('application');
-        });
-
-        app('router')->after(function(){
-            Benchmarking::end('application');
-        });
-
+    {
         $kernel = $this->app->make('Illuminate\Contracts\Http\Kernel');
         $kernel->prependMiddleware(\Prettus\RequestLogger\Middlewares\ResponseLoggerMiddleware::class);
     }

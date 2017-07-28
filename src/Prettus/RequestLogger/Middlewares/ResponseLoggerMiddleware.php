@@ -16,18 +16,21 @@ class ResponseLoggerMiddleware
 
     public function handle(Request $request, Closure $next)
     {
-        return $next($request);
+        Benchmarking::start('application');
+        $response = $next($request);
+        Benchmarking::end('application');
+        return $response;
     }
 
     public function terminate(Request $request, Response $response)
     {
-        // For some reason $request->route() returns null...        
+        // For some reason $request->route() returns null...
 /*        $currentRoute = Route::getCurrentRoute();
 
         \Log::debug($currentRoute->getPath(). " ". print_r($currentRoute->getMethods(), true));
 */
 
-        if(!$this->excluded($request)) {                    
+        if(!$this->excluded($request)) {
             $task = new LogTask($request, $response);
 
             if($queueName = config('request-logger.queue')) {
@@ -40,7 +43,7 @@ class ResponseLoggerMiddleware
 
     protected function excluded(Request $request) {
         $exclude = config('request-logger.exclude');
-		
+
 		if (null === $exclude || empty($exclude)) {
 			return false;
 		}
