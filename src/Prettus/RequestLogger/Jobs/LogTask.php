@@ -8,10 +8,11 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Bus\Queueable;
 
-class LogTask extends Job implements SelfHandling, ShouldQueue
+class LogTask implements SelfHandling, ShouldQueue
 {
-    use InteractsWithQueue, SerializesModels;
+    use Queueable, InteractsWithQueue, SerializesModels;
 
     protected $request;
     protected $response;
@@ -36,8 +37,8 @@ class LogTask extends Job implements SelfHandling, ShouldQueue
      * @return void
      */
     public function handle()
-    {        
+    {
         $requestLogger = app(\Prettus\RequestLogger\ResponseLogger::class);
-        $requestLogger->log($this->request, $this->response);        
+        $requestLogger->log($this->request, $this->response);
     }
 }
