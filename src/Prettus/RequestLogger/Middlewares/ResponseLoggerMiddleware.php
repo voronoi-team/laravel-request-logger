@@ -3,6 +3,7 @@ namespace Prettus\RequestLogger\Middlewares;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Prettus\RequestLogger\Jobs\LogTask;
+use Prettus\RequestLogger\Helpers\Benchmarking;
 
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
