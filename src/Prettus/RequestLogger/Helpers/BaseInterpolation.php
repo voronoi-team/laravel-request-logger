@@ -19,8 +19,8 @@ abstract class BaseInterpolation implements Interpolable {
     /**
      * @var Response
      */
-    protected $response;    
-    
+    protected $response;
+
     /**
      * @param Request $request
      */
@@ -43,5 +43,16 @@ abstract class BaseInterpolation implements Interpolable {
     protected function escape($raw)
     {
         return preg_replace('/\s/', "\\s", $raw);
+    }
+
+    protected function convertToString($raw) {
+      if (is_string($raw)) {
+        return $raw;
+      } elseif (is_array($raw)) {
+        return json_encode($raw);
+      } else {
+        // try to cast
+        return (String) $raw;
+      }
     }
 }
