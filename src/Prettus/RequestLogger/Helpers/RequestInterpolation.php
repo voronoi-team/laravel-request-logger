@@ -78,6 +78,8 @@ class RequestInterpolation extends BaseInterpolation {
             return $this->request->$method();
         } elseif( isset($_SERVER[$server_var]) ) {
             return $this->request->server($server_var);
+        } elseif( $method == 'allHeaders' ) {
+          return $this->request->header();
         } else {
             $matches = [];
             preg_match("/([-\w]{2,})(?:\[([^\]]+)\])?/", $variable, $matches);
