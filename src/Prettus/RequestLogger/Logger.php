@@ -1,8 +1,8 @@
-<?php 
+<?php
 
 namespace Prettus\RequestLogger;
 
-use Illuminate\Contracts\Logging\Log;
+use Psr\Log\LoggerInterface as Log;
 
 /**
  * Class Logger
@@ -21,7 +21,7 @@ class Logger implements Log
      */
     public function __construct()
     {
-        $this->monolog = clone app('log')->getMonolog();
+        $this->monolog = \Illuminate\Support\Facades\Log::getLogger();
 
         if( config('request-logger.logger.enabled') && $handlers = config('request-logger.logger.handlers') ) {
             if( count($handlers) ) {
@@ -37,6 +37,19 @@ class Logger implements Log
                 }
             }
         }
+    }
+
+    /**
+     * System is unusable.
+     *
+     * @param string $message
+     * @param array  $context
+     *
+     * @return void
+     */
+    public function emergency($message, array $context = array())
+    {
+        $this->monolog->emergency($message, $context);
     }
 
     /**
