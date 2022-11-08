@@ -55,7 +55,7 @@ class RequestInterpolation extends BaseInterpolation {
             "getUser",
             "referer",
             "getContent"
-        ],Str:camel($variable));
+        ],Str::camel($variable));
 
         $server_var = str_replace([
             "ACCEPT",
