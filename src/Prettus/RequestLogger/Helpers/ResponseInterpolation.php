@@ -47,7 +47,7 @@ class ResponseInterpolation extends BaseInterpolation {
             "getProtocolVersion",
             "getStatusCode",
             "getStatusCode"
-        ],Str:camel($variable));
+        ],Str::camel($variable));
 
         if( method_exists($this->response, $method) ) {
             return $this->response->$method();
