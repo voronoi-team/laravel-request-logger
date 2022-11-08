@@ -1,5 +1,7 @@
 <?php namespace Prettus\RequestLogger\Helpers;
 
+use Str;
+
 /**
  * Class ResponseInterpolation
  * @package Prettus\RequestLogger\Helpers
@@ -45,7 +47,7 @@ class ResponseInterpolation extends BaseInterpolation {
             "getProtocolVersion",
             "getStatusCode",
             "getStatusCode"
-        ],camel_case($variable));
+        ],Str:camel($variable));
 
         if( method_exists($this->response, $method) ) {
             return $this->response->$method();
