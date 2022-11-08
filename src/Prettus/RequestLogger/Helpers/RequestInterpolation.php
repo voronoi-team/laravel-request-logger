@@ -1,6 +1,7 @@
 <?php namespace Prettus\RequestLogger\Helpers;
 
 use Carbon\Carbon;
+use Str;
 
 /**
  * Class RequestInterpolation
@@ -54,7 +55,7 @@ class RequestInterpolation extends BaseInterpolation {
             "getUser",
             "referer",
             "getContent"
-        ],camel_case($variable));
+        ],Str:camel($variable));
 
         $server_var = str_replace([
             "ACCEPT",
